@@ -128,7 +128,7 @@ html {
     align-items: center;
     justify-content: center;
     color: white;
-    background: url('https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background: url('assets/img/backgroundImg.jpg') no-repeat center center;
     background-size: cover;
     padding: 0 1rem;
     overflow: hidden; 
