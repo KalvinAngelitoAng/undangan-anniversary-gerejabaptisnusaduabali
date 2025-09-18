@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- Countdown Timer ---
-    const countdownDate = new Date("Oct 10, 2025 10:00:00").getTime();
+    const countdownDate = new Date("Oct 6, 2025 18:30:00").getTime();
     const countdownFunction = setInterval(function () {
         const now = new Date().getTime();
         const distance = countdownDate - now;
@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const marqueeContainer = document.getElementById('commentMarquee');
 
     let comments = [
-        { name: 'Jemaat Tuhan', text: 'Selamat Ulang Tahun Pertama! Tuhan Yesus memberkati.' },
-        { name: 'Hamba Tuhan', text: 'Teruslah bertumbuh dan menjadi berkat bagi banyak orang.' },
-        { name: 'Simpatisan', text: 'Sukacita melimpah untuk GBI Nusa Dua! Maju terus dalam pelayanan.' },
-        { name: 'Keluarga Sion', text: 'Selamat atas satu tahun pelayanannya. Soli Deo Gloria!' }
+        { name: 'Christine', text: 'Selamat Ulang Tahun Pertama! Tuhan Yesus memberkati.' },
+        { name: 'Yosep', text: 'Teruslah bertumbuh dan menjadi berkat bagi banyak orang.' },
+        { name: 'Simpatisan', text: 'Sukacita melimpah untuk GBI Nusa Dua Bali! Maju terus dalam pelayanan.' },
+        { name: 'Kevin Anggara', text: 'Selamat atas satu tahun pelayanan Gereja Baptis Nusa Dua Bali. Soli Deo Gloria!' }
     ];
 
     function renderComments() {
@@ -81,4 +81,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     renderComments(); // Tampilkan komentar awal saat halaman dimuat
+
+    // --- Swiper Gallery Initialization ---
+    // ===== PERUBAHAN DI SINI =====
+    const swiper = new Swiper('.gallery-slider', {
+        // Konfigurasi Autoplay ditambahkan
+        autoplay: {
+            delay: 2500, // Waktu jeda antar slide (dalam milidetik), misal: 2.5 detik
+            disableOnInteraction: false, // Lanjutkan autoplay meskipun user berinteraksi (klik)
+        },
+        loop: true,
+        grabCursor: true,
+        slidesPerView: 1,
+        spaceBetween: 15,
+        centeredSlides: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            // Tampilkan 3 slide untuk layar 768px atau lebih lebar
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            }
+        }
+    });
+    // ===== AKHIR PERUBAHAN =====
 });

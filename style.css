@@ -34,25 +34,90 @@ html {
 
 /* Navigation Bar */
 .navbar {
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    padding: 1rem 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
 }
+
 .navbar.scrolled {
+    padding: 0.5rem 0;
     background-color: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
+
 .navbar-brand {
     font-family: var(--font-heading);
     font-weight: 700;
+    font-size: 1.75rem; 
 }
+
 .nav-link {
     font-weight: 600;
     color: var(--color-dark);
     transition: color 0.3s ease;
-    margin: 0 10px;
+    font-size: 1.1rem;
+    margin: 0 15px;
+    padding: 5px 0;
+    position: relative;
 }
+
+.navbar:not(.scrolled) .nav-link,
+.navbar:not(.scrolled) .navbar-brand {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
 .nav-link:hover {
     color: var(--color-secondary);
+}
+
+.navbar.scrolled .nav-link:hover {
+    color: var(--color-primary);
+}
+
+/* Efek "WOW" Garis Bawah Animasi */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-secondary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.navbar.scrolled .nav-link::after {
+    background-color: var(--color-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* Keyframes untuk Animasi WOW di Header */
+@keyframes kenburns {
+    0% {
+        background-size: 100%;
+    }
+    100% {
+        background-size: 115%;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Hero Section */
@@ -63,9 +128,11 @@ html {
     align-items: center;
     justify-content: center;
     color: white;
-    background: url('https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-    /* Menambahkan padding untuk konten agar tidak terlalu mepet di layar kecil */
+    background: url('https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
     padding: 0 1rem;
+    overflow: hidden; 
+    /* animation: kenburns 25s ease-in-out infinite alternate; */
 }
 .hero-overlay {
     position: absolute;
@@ -84,35 +151,43 @@ html {
 .hero-subheading {
     font-family: var(--font-body);
     font-style: italic;
-    font-size: 1.2rem; /* Ukuran disesuaikan */
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0; 
+    animation: fadeInUp 1s ease-out 0.2s forwards;
 }
 .hero-heading {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 10vw, 5rem); /* Ukuran dibuat responsif, min 2.5rem, max 5rem */
     font-weight: 700;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    font-size: clamp(3rem, 12vw, 6.5rem);
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
+    opacity: 0; 
+    animation: fadeInUp 1s ease-out 0.5s forwards;
 }
 
 /* Countdown Timer */
 .countdown-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Jarak dikurangi untuk layar kecil */
+    gap: 10px;
     margin-top: 30px;
     text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-    flex-wrap: wrap; /* Izinkan item pindah ke bawah jika tidak cukup ruang */
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.9s forwards;
 }
 .countdown-container div {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    padding: 15px; /* Padding dikurangi */
+    padding: 15px;
     border-radius: 10px;
-    min-width: 80px; /* Lebar minimum dikurangi */
-    font-size: 0.8rem; /* Ukuran font teks (Hari, Jam) dikecilkan */
+    min-width: 80px;
+    font-size: 0.8rem;
 }
 .countdown-container span {
     display: block;
-    font-size: 2rem; /* Ukuran font angka dikecilkan */
+    font-size: 2rem;
     font-weight: 600;
 }
 
@@ -207,44 +282,37 @@ html {
 .map-container iframe {
     width: 100%;
     height: 100%;
-    min-height: 350px; /* Tinggi peta dikurangi di layar kecil */
+    min-height: 350px;
     border: 0;
 }
 
 /* Gallery Section */
-.gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-    grid-auto-rows: 250px;
-    grid-auto-flow: dense;
+.gallery-slider {
+    width: 100%;
+    height: 400px;
+    padding-bottom: 40px; 
 }
-.gallery-item {
-    overflow: hidden;
+.gallery-slider .swiper-slide {
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    overflow: hidden;
+    background-color: #f0f0f0;
 }
-.gallery-item:hover {
-    transform: scale(1.03);
-}
-.gallery-item img {
+.gallery-slider .swiper-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease-out;
 }
-.gallery-item:hover img {
-    transform: scale(1.1);
+.swiper-button-next, .swiper-button-prev {
+    color: var(--color-primary);
 }
-.gallery-item:nth-child(2) { grid-column: span 2; }
-.gallery-item:nth-child(4) { grid-row: span 2; }
-.gallery-item:nth-child(7) { grid-column: span 2; }
+.swiper-pagination-bullet-active {
+    background-color: var(--color-primary);
+}
 
 /* Comment Section */
 .comment-form {
     background-color: var(--color-surface);
-    padding: 30px; /* Padding disesuaikan */
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 25px rgba(0,0,0,0.07);
     max-width: 700px;
@@ -294,18 +362,27 @@ html {
     color: #ccc;
 }
 
+.footer a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer a:hover {
+    color: #ccc;
+}
+
+
 
 /* ==========================================================================
    RESPONSIVE DESIGN FOR MOBILE & TABLET
    ========================================================================== */
 @media (max-width: 768px) {
     
-    /* Ukuran font judul dikecilkan agar tidak terlalu mendominasi */
     .hero-subheading {
         font-size: 1rem;
     }
     
-    /* Penyesuaian section */
     .section {
         padding: 60px 0;
     }
@@ -313,35 +390,26 @@ html {
         font-size: 2rem;
     }
 
-    /* === PERUBAHAN UTAMA: TIMELINE === */
-    /* Garis timeline dipindahkan ke sisi kiri */
     .timeline::after {
         left: 20px;
     }
 
-    /* Semua item timeline dipindahkan ke sisi kanan garis */
     .timeline-item {
         width: 100%;
-        padding-left: 50px; /* Beri ruang dari garis */
+        padding-left: 50px;
         padding-right: 15px;
     }
     
-    .timeline-item:nth-child(odd),
-    .timeline-item:nth-child(even) {
-        left: 0;
+    .timeline-item:nth-child(2) {
+        left: 0px;
     }
 
-    /* Pindahkan lingkaran penanda ke garis di sisi kiri */
+    .timeline-item:nth-child(2)::after {
+        left: 10px;
+    }
+
     .timeline-item::after {
-        left: 11px; /* Disesuaikan agar pas dengan garis baru */
-    }
-
-    /* Menghilangkan properti span kolom/baris pada galeri di layar kecil */
-    .gallery-item:nth-child(2),
-    .gallery-item:nth-child(4),
-    .gallery-item:nth-child(7) {
-        grid-column: span 1;
-        grid-row: span 1;
+        left: 10px;
     }
 
     .comment-form {
@@ -350,7 +418,6 @@ html {
 }
 
 @media (max-width: 480px) {
-    /* Penyesuaian lebih lanjut untuk layar HP yang lebih kecil */
     .countdown-container {
         gap: 5px;
     }
@@ -359,6 +426,19 @@ html {
         padding: 10px 5px;
     }
     .countdown-container span {
-        font-size: 1.5rem;
+        font-size: 1.5rem;  
     }
+}
+
+@media (max-width: 991.98px) {
+  .navbar .navbar-collapse {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top: 1rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
 }
