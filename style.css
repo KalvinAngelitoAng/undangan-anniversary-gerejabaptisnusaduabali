@@ -285,6 +285,59 @@ html {
     min-height: 350px;
     border: 0;
 }
+/* ==========================================================
+   STYLING UNTUK KARTU JADWAL ACARA DENGAN SCROLL
+   ========================================================== */
+
+.schedule-scroll-container {
+    display: flex;
+    overflow-x: auto; /* Memungkinkan scroll horizontal */
+    padding-bottom: 15px; /* Memberi ruang untuk scrollbar */
+    -webkit-overflow-scrolling: touch; /* Scroll lebih mulus di iOS */
+}
+
+.schedule-item {
+    flex: 0 0 150px; /* Lebar setiap item jadwal */
+    padding: 15px;
+    margin-right: 15px;
+    border-radius: 8px;
+    background-color: var(--color-light-gray);
+    text-align: center;
+    border: 1px solid #eee;
+}
+
+.schedule-item h4 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--color-primary);
+}
+
+.schedule-item p {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+.schedule-scroll-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+.schedule-scroll-container::-webkit-scrollbar {
+    height: 6px;
+}
+.schedule-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.schedule-scroll-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+.schedule-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
 
 /* Gallery Section */
 .gallery-slider {
