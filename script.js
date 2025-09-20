@@ -44,44 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const elementsToAnimate = document.querySelectorAll('.fade-in');
     elementsToAnimate.forEach(el => observer.observe(el));
 
-
-    // --- Comment Section Logic ---
-    const commentForm = document.getElementById('commentForm');
-    const marqueeContainer = document.getElementById('commentMarquee');
-
-    let comments = [
-        { name: 'Christine', text: 'Selamat Ulang Tahun Pertama! Tuhan Yesus memberkati.' },
-        { name: 'Yosep', text: 'Teruslah bertumbuh dan menjadi berkat bagi banyak orang.' },
-        { name: 'Simpatisan', text: 'Sukacita melimpah untuk GBI Nusa Dua Bali! Maju terus dalam pelayanan.' },
-        { name: 'Kevin Anggara', text: 'Selamat atas satu tahun pelayanan Gereja Baptis Nusa Dua Bali. Soli Deo Gloria!' }
-    ];
-
-    function renderComments() {
-        marqueeContainer.innerHTML = '';
-        const duplicatedComments = [...comments, ...comments]; // Untuk efek rolling yang mulus
-
-        duplicatedComments.forEach(comment => {
-            const commentCard = document.createElement('div');
-            commentCard.className = 'comment-card';
-            commentCard.innerHTML = `<strong>${comment.name}:</strong> <em>"${comment.text}"</em>`;
-            marqueeContainer.appendChild(commentCard);
-        });
-    }
-
-    commentForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const name = document.getElementById('commenterName').value;
-        const text = document.getElementById('commentText').value;
-
-        if (name && text) {
-            comments.unshift({ name, text });
-            renderComments();
-            commentForm.reset();
-        }
-    });
-
-    renderComments(); // Tampilkan komentar awal saat halaman dimuat
-
     // --- Swiper Gallery Initialization ---
     // ===== PERUBAHAN DI SINI =====
     const swiper = new Swiper('.gallery-slider', {
