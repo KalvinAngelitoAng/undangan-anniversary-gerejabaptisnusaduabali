@@ -411,6 +411,10 @@ html {
 
 /* Footer */
 .footer {
+    display: flex;
+    flex-direction : column;
+    flex-wrap : wrap;
+    justify-content : center;
     background-color: var(--color-dark);
     color: #ccc;
 }
