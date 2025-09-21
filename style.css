@@ -411,7 +411,6 @@ html {
 
 /* Footer */
 .footer {
-    display: flex;
     background-color: var(--color-dark);
     color: #ccc;
 }
